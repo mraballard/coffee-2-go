@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161111212023) do
+ActiveRecord::Schema.define(version: 20161113183334) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,22 +21,33 @@ ActiveRecord::Schema.define(version: 20161111212023) do
     t.string   "description"
     t.float    "price"
     t.integer  "menu_id"
-    t.integer  "order_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.index ["menu_id"], name: "index_items_on_menu_id", using: :btree
-    t.index ["order_id"], name: "index_items_on_order_id", using: :btree
   end
 
   create_table "menus", force: :cascade do |t|
+    t.integer  "store_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["store_id"], name: "index_menus_on_store_id", using: :btree
+  end
+
+  create_table "order_and_items", force: :cascade do |t|
+    t.integer "order_id"
+    t.integer "item_id"
+    t.index ["item_id"], name: "index_order_and_items_on_item_id", using: :btree
+    t.index ["order_id"], name: "index_order_and_items_on_order_id", using: :btree
   end
 
   create_table "orders", force: :cascade do |t|
-    t.decimal  "total",      precision: 8, scale: 2
+    t.decimal  "total",      precision: 2, scale: 2
+    t.integer  "user_id"
+    t.integer  "store_id"
     t.datetime "created_at",                         null: false
     t.datetime "updated_at",                         null: false
+    t.index ["store_id"], name: "index_orders_on_store_id", using: :btree
+    t.index ["user_id"], name: "index_orders_on_user_id", using: :btree
   end
 
   create_table "stores", force: :cascade do |t|
