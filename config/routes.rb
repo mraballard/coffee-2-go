@@ -9,4 +9,5 @@ Rails.application.routes.draw do
     end
   end
   resources :store, only: [:create, :show]
+  resources :items, only: [:index]
 end
