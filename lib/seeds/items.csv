@@ -1,0 +1,10 @@
+name,category,description,price,menu_id
+Caffè Americano,Espresso,Espresso shots are topped with hot water to produce a light layer of crema. The result is this wonderfully rich cup with depth and nuance.,2.50,1
+Caffè Latte,Espresso,"Our dark, rich espresso balanced with steamed milk and a light layer of foam. A perfect milk forward warm up.",3.50,1
+Caffè Mocha,Espresso,"We combine our rich, full-bodied espresso with bittersweet mocha sauce and steamed milk, then top it off with sweetened whipped cream. The classic coffee drink to satisfy your sweet tooth.",4.50,1
+Cappuccino,Espresso,"Dark, rich espresso lies in wait under a smoothed and stretched layer of thick foam. It's truly the height of our baristas' craft.",3.50,1
+Espresso,Espresso,Our smooth signature Espresso Roast with rich flavor and caramelly sweetness is at the very heart of everything we do.,2.50,1
+Espresso Macchiato,Espresso,Our rich espresso marked with dollop of steamed milk and foam. A European-style classic.,3.00,1
+Flat White,Espresso,"Bold ristretto shots of espresso get the perfect amount of steamed whole milk to create a not too strong, not too creamy, just right flavor.",3.50,1
+,,,,
+,,,,
