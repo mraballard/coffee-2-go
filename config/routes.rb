@@ -3,6 +3,10 @@ Rails.application.routes.draw do
   root 'welcome#index'
   resources :users, except: [:index] do
     resources :order, except: [:update]
+
+    collection do
+      post '/login', to: 'users#login'
+    end
   end
   resources :store, only: [:create, :show]
 end
