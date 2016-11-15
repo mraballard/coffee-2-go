@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161114191011) do
+ActiveRecord::Schema.define(version: 20161115220219) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,12 +36,14 @@ ActiveRecord::Schema.define(version: 20161114191011) do
   create_table "order_and_items", force: :cascade do |t|
     t.integer "order_id"
     t.integer "item_id"
+    t.integer "quantity"
+    t.decimal "subtotal", precision: 8, scale: 2
     t.index ["item_id"], name: "index_order_and_items_on_item_id", using: :btree
     t.index ["order_id"], name: "index_order_and_items_on_order_id", using: :btree
   end
 
   create_table "orders", force: :cascade do |t|
-    t.decimal  "total",      precision: 2, scale: 2
+    t.decimal  "total",      precision: 8, scale: 2
     t.integer  "user_id"
     t.integer  "store_id"
     t.datetime "created_at",                         null: false
@@ -56,6 +58,7 @@ ActiveRecord::Schema.define(version: 20161114191011) do
     t.decimal  "lng",        precision: 10, scale: 6
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
+    t.string   "address"
   end
 
   create_table "users", force: :cascade do |t|

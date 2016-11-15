@@ -10,8 +10,8 @@ require 'csv'
 
 csv_text = File.read(Rails.root.join('lib', 'seeds', 'items.csv'))
 csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
-Store.create(name: "The Daily Grind")
-Menu.create(store_id: 1)
+# Store.create(name: "The Daily Grind")
+# Menu.create(store_id: 2)
 
 csv.each do |row|
   t = Item.new
@@ -19,7 +19,7 @@ csv.each do |row|
   t.category = row['category']
   t.description = row['description']
   t.price = row['price']
-  t.menu_id = row['menu_id']
+  t.menu_id = 2
 
   t.save
   puts "#{t.errors}"
