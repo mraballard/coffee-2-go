@@ -12,14 +12,15 @@ class OrdersController < ApplicationController
 
   def create
     order = Order.new(order_params)
-    params[:items].each do |id|
-      item = Item.find(id)
-      order.items.push(item)
-    end
     if order.save
+      params[:items].each do |item|
+        thisItem = Item.find(item[:product][:id])
+        order.items.push(thisItem)
+        Detail.create(quantity: item[:quantity], subtotal: item[:subtotal], order_id: order[:id], item_id: thisItem[:id])
+      end
       render json: {status: 200, message: "ok", order: order}
     else
-      render json: {status: 422, order: order, errors: order.errors }
+      render json: {status: 422, message: "Order not saved", errors: order.errors}
     end
   end
 
