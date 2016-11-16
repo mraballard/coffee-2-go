@@ -3,6 +3,12 @@ class OrdersController < ApplicationController
 
   def create
     order = Order.new(order_params)
+    puts "This is params[:items]"
+    puts params[:items]
+    params[:items].each do |id|
+      item = Item.find(id)
+      order.items.push(item)
+    end
     if order.save
       render json: {status: 200, message: "ok", order: order}
     else
@@ -43,7 +49,7 @@ class OrdersController < ApplicationController
     end
 
     def order_params
-      params.required(:order).permit(:total, :user_id, :store_id)
+      params.required(:order).permit(:total, :user_id, :store_id, :items)
     end
 
 end
