@@ -25,9 +25,15 @@ class OrdersController < ApplicationController
   end
 
   def show
+    orderDetails = []
     orderItems = Order.find(params[:id]).items
-    if orderItems.length > 0
-      render json: {status: 200, message: "Ok", items: orderItems}
+    orderItems.each_with_index do |item, index|
+      details = Detail.where(order_id: params[:id], item_id: item[:id])
+      orderDetails[index] = {item: item, details: details}
+      puts details
+    end
+    if orderDetails.length > 0
+      render json: {status: 200, message: "Ok", items: orderDetails}
     else
       render json: {status: 422, message: "No items found"}
     end
