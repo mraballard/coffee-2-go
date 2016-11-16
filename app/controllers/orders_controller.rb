@@ -1,10 +1,17 @@
 class OrdersController < ApplicationController
   before_action :authenticate
 
+  def index
+    orders = User.find(params[:user_id]).orders
+    if orders.length > 0
+      render json: {status: 200, orders: orders}
+    else
+      render json: {status: 422, message: "No orders"}
+    end
+  end
+
   def create
     order = Order.new(order_params)
-    puts "This is params[:items]"
-    puts params[:items]
     params[:items].each do |id|
       item = Item.find(id)
       order.items.push(item)
@@ -17,7 +24,12 @@ class OrdersController < ApplicationController
   end
 
   def show
-
+    orderItems = Order.find(params[:id]).items
+    if orderItems.length > 0
+      render json: {status: 200, message: "Ok", items: orderItems}
+    else
+      render json: {status: 422, message: "No items found"}
+    end
   end
 
   def update
