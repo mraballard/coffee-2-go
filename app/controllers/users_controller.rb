@@ -18,6 +18,16 @@ class UsersController < ApplicationController
     render json: {status: 200, user: user, albums: albums}
   end
 
+  def current
+    user = current_user
+    user = User.find(user[0]['user']['id'])
+    if user
+      render json: {status: 200, user: user}
+    else
+      render json: {status: 422, message: "no current user"}
+    end
+  end
+
   def update
     user = User.find(params[:id])
     if user.update(user_params)

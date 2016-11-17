@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
     collection do
       post '/login', to: 'users#login'
+      get '/current-user', to: 'users#current'
     end
   end
   resources :stores, only: [:create, :show]
