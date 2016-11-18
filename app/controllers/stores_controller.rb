@@ -1,6 +1,16 @@
 class StoresController < ApplicationController
   before_action :authenticate
 
+  def index
+    stores = User.find(params[:user_id]).stores.uniq
+
+    if stores.length > 0
+      render json: {status: 200, stores: stores}
+    else
+      render json: {status: 422, message: "No stores"}
+    end
+  end
+
   def create
     store = Store.where(address: params[:address])
     puts  "HERE IS THE STORE"
