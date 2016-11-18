@@ -2,7 +2,7 @@ class StoresController < ApplicationController
   before_action :authenticate
 
   def index
-    stores = User.find(params[:user_id]).stores.uniq
+    stores = User.find(params[:user_id]).stores.order('stores.created_at DESC').limit('6').uniq
 
     if stores.length > 0
       render json: {status: 200, stores: stores}

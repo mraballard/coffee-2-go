@@ -2,7 +2,7 @@ class OrdersController < ApplicationController
   before_action :authenticate
 
   def index
-    orders = User.find(params[:user_id]).orders
+    orders = User.find(params[:user_id]).orders.order('orders.created_at DESC').limit('8')
     if orders.length > 0
       render json: {status: 200, orders: orders}
     else
