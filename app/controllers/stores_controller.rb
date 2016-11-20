@@ -1,5 +1,5 @@
 class StoresController < ApplicationController
-  before_action :authenticate
+  before_action :authenticate, except: [:create]
 
   def index
     stores = User.find(params[:user_id]).stores.order('stores.created_at DESC').limit('6').uniq
@@ -9,6 +9,10 @@ class StoresController < ApplicationController
     else
       render json: {status: 422, message: "No stores"}
     end
+  end
+
+  def show
+
   end
 
   def create
