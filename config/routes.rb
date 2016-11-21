@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     collection do
       post '/login', to: 'users#login'
       get '/current-user', to: 'users#current'
+      get '/google-api-key', to: 'users#apikey'
     end
   end
   resources :stores, only: [:create, :show]

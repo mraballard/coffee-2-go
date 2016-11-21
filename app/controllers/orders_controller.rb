@@ -3,8 +3,12 @@ class OrdersController < ApplicationController
 
   def index
     orders = User.find(params[:user_id]).orders.order('orders.created_at DESC').limit('6')
+    array = []
     if orders.length > 0
-      render json: {status: 200, orders: orders}
+      orders.each do |order|
+        array.push({order: order, store: order.store})
+      end
+      render json: {status: 200, orders: array}
     else
       render json: {status: 422, message: "No orders"}
     end

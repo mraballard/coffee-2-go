@@ -1,6 +1,10 @@
 class UsersController < ApplicationController
   before_action :authenticate, except: [:login, :create]
 
+  def apikey
+    render json: {key: ENV['GOOGLE_API_KEY']}
+  end
+
   def create
     puts user_params
     user = User.new(user_params)
